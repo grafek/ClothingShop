@@ -1,14 +1,26 @@
-import { QueryClientProvider, QueryClient } from "react-query";
-import Test from "./components/Test";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import ShopHome from "./pages/shop/ShopHome";
+import ShopLayout from "./components/shop/ShopLayout";
+import DashboardLayout from "./components/dashboard/DashboardLayout";
 
 function App() {
-  const qc = new QueryClient();
-
-  return (
-    <QueryClientProvider client={qc}>
-      <Test />
-    </QueryClientProvider>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route element={<ShopLayout />}>
+          <Route path="/" element={<ShopHome />} />
+        </Route>
+        <Route element={<DashboardLayout />}></Route>
+      </>
+    )
   );
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

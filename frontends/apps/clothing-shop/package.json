@@ -31,7 +31,6 @@
     "postcss": "^8.4.30",
     "prettier-config": "workspace:*",
     "tailwindcss": "^3.3.3",
-    "tailwindcss-animate": "^1.0.7",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.3",
     "vite": "^4.4.7"

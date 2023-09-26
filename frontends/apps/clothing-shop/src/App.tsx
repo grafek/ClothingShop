@@ -15,7 +15,6 @@ function App() {
         <Route element={<ShopLayout />}>
           <Route path="/" element={<ShopHome />} />
         </Route>
-        {/* <Route element={<DashboardLayout />}></Route> */}
       </>
     )
   );

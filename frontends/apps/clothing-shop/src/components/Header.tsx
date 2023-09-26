@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import {
-  ActionIcon,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "ui";
+} from "@ui/components/dropdown-menu";
+import { ActionIcon } from "@ui/components/ActionIcon";
 
 const TOP_HEADER_ITEMS = [
   {
@@ -50,12 +50,14 @@ const CATEGORY_ITEMS = [
 
 export default function Header() {
   return (
-    <header className="border-primary-200 bg-primary-100/20 sticky top-0 flex flex-col gap-4 border-b p-4 pb-2 backdrop-blur-[1px]">
+    <header className="sticky top-0 flex flex-col gap-4 bg-primary-100/20 py-4 pb-2 backdrop-blur-[1px]">
       <div className="flex items-center justify-between">
         <Link to={"/"}>
           <img src="/icons/logo-mock.svg" />
         </Link>
+
         <SearchBar />
+
         <div className="flex gap-4">
           {TOP_HEADER_ITEMS.map(({ iconName, onClickHandler }) => (
             <ActionIcon
@@ -72,7 +74,7 @@ export default function Header() {
             <Link
               key={path}
               to={`/category/${path}`}
-              className={`hover:bg-primary-200/70 rounded px-4 py-1 font-medium capitalize transition-all duration-200 ${className}`}
+              className={`rounded px-4 py-1 font-medium capitalize transition-all duration-200 hover:bg-primary-200/70 ${className}`}
             >
               {path}
             </Link>
@@ -89,7 +91,7 @@ export default function Header() {
                 <DropdownMenuItem key={path}>
                   <Link
                     to={`/category/${path}`}
-                    className={`hover:bg-primary-200/70 rounded px-4 py-1 font-medium capitalize transition-all duration-200 ${className}`}
+                    className={`rounded px-4 py-1 font-medium capitalize transition-all duration-200 hover:bg-primary-200/70 ${className}`}
                   >
                     {path}
                   </Link>

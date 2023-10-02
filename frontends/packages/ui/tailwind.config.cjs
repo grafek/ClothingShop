@@ -3,8 +3,9 @@ module.exports = {
   darkMode: ["class"],
   content: [
     "./**/**/*.{js,ts,jsx,tsx,html}",
+    "components/*.{js,ts,jsx,tsx,html}",
     "!node_modules",
-    "./pages/**/*.{js,ts,jsx,tsx}",
+    "../../packages/ui/components/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     container: {
@@ -16,13 +17,13 @@ module.exports = {
     },
     colors: {
       primary: {
-        100: "#f8f9fa",
-        200: "#dee2e6",
-        300: "#adb5bd",
-        400: "#6c757d",
-        500: "#495057",
-        600: "#343a40",
-        700: "#212529",
+        100: "#fafafa",
+        200: "#e6e6e6",
+        300: "#d9d9d9",
+        400: "#bfbfbf",
+        500: "#b3b3b3",
+        600: "#999999",
+        700: "#8c8c8c",
       },
       accent: {
         100: "#ffd131",

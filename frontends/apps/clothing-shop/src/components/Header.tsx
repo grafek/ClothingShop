@@ -1,106 +1,116 @@
+import { NavLink } from "react-router-dom";
+import { CrossIcon, HamburgerIcon, Logo } from "@ui/icons/index";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@ui/components/dropdown-menu";
-import { ActionIcon } from "@ui/components/ActionIcon";
+import CartPopover from "@shop/components/popovers/CartPopover";
+import UserPopover from "@shop/components/popovers/UserPopover";
+import FavoritesPopover from "@shop/components/popovers/FavoritesPopover";
 
-const TOP_HEADER_ITEMS = [
+const NAV_ITEMS = [
   {
-    iconName: "cart",
-    onClickHandler: () => {},
+    path: "/",
+    name: "Home",
   },
   {
-    iconName: "favorite",
-    onClickHandler: () => {},
+    path: "/category/men",
+    name: "Men",
   },
   {
-    iconName: "user",
-    onClickHandler: () => {},
-  },
-];
-
-const CATEGORY_ITEMS = [
-  {
-    path: "women",
+    path: "/category/women",
+    name: "Women",
   },
   {
-    path: "men",
-  },
-  {
-    path: "kids",
-  },
-  {
-    path: "sports",
-  },
-  {
-    path: "brands",
-  },
-  {
-    path: "new",
-  },
-  {
-    path: "sale",
-    className: "!text-danger font-normal",
+    path: "/category/kids",
+    name: "kids",
   },
 ];
 
 export default function Header() {
+  const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
+
+  const routeChangeHandler = () => {
+    setIsMobileMenuVisible(false);
+    window.scrollTo({ behavior: "smooth", top: 0 });
+  };
+
   return (
-    <header className="sticky top-0 flex flex-col gap-4 bg-primary-100/20 py-4 pb-2 backdrop-blur-[1px]">
-      <div className="flex items-center justify-between">
-        <Link to={"/"}>
-          <img src="/icons/logo-mock.svg" />
+    <header className="sticky top-0 flex flex-col gap-4 border-b bg-primary-100/60 backdrop-blur-[1px]">
+      <div className="flex w-full items-center justify-between px-6 py-4 md:px-16">
+        <div className="z-[100] flex-1 shrink-0 md:hidden">
+          <button onClick={() => setIsMobileMenuVisible((prev) => !prev)}>
+            <img src={isMobileMenuVisible ? CrossIcon : HamburgerIcon} />
+          </button>
+        </div>
+        <nav className="hidden flex-1 md:block">
+          <ul className="flex gap-8 capitalize">
+            {NAV_ITEMS.map(({ path, name }) => (
+              <NavLink
+                key={path}
+                state={true}
+                to={`${path}`}
+                className={({ isActive }) => (isActive ? "font-semibold" : "")}
+              >
+                <li className="relative after:absolute after:-bottom-[2px] after:left-0 after:block after:h-[3px] after:w-0 after:bg-accent-200 after:transition-all after:duration-500 hover:after:w-full">
+                  {name}
+                </li>
+              </NavLink>
+            ))}
+          </ul>
+        </nav>
+        <HamburgerMenu
+          isMobileMenuVisible={isMobileMenuVisible}
+          routeChangeHandler={routeChangeHandler}
+        />
+        <Link to={"/"} className="flex flex-1 shrink-0 justify-center">
+          <img src={Logo} />
         </Link>
 
-        <SearchBar />
+        {/* <SearchBar /> */}
 
-        <div className="flex gap-4">
-          {TOP_HEADER_ITEMS.map(({ iconName, onClickHandler }) => (
-            <ActionIcon
-              key={iconName}
-              iconName={iconName}
-              onClickHandler={onClickHandler}
-            />
-          ))}
+        <div className="flex flex-1 shrink-0 justify-end gap-4">
+          <CartPopover />
+          <FavoritesPopover />
+          <UserPopover />
         </div>
       </div>
-      <nav>
-        <ul className="hidden gap-1 sm:flex">
-          {CATEGORY_ITEMS.map(({ className, path }) => (
-            <Link
-              key={path}
-              to={`/category/${path}`}
-              className={`rounded px-4 py-1 font-medium capitalize transition-all duration-200 hover:bg-primary-200/70 ${className}`}
-            >
-              {path}
-            </Link>
-          ))}
-        </ul>
-
-        <div className="flex gap-1 pl-4 sm:hidden">
-          <DropdownMenu>
-            <DropdownMenuTrigger className="font-medium">
-              Categories
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {CATEGORY_ITEMS.map(({ className, path }) => (
-                <DropdownMenuItem key={path}>
-                  <Link
-                    to={`/category/${path}`}
-                    className={`rounded px-4 py-1 font-medium capitalize transition-all duration-200 hover:bg-primary-200/70 ${className}`}
-                  >
-                    {path}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </nav>
     </header>
+  );
+}
+
+type HamburgerMenuProps = {
+  isMobileMenuVisible: boolean;
+  routeChangeHandler: () => void;
+};
+
+function HamburgerMenu({
+  isMobileMenuVisible,
+  routeChangeHandler,
+}: HamburgerMenuProps) {
+  return (
+    <div
+      className={`absolute top-0 z-50 h-[100dvh] w-[calc(50%-2rem)] bg-primary-200/70 px-6 py-4 transition-all duration-500 md:hidden ${
+        isMobileMenuVisible
+          ? "-translate-x-6"
+          : "-translate-x-[calc(100%+24px)]"
+      }`}
+    >
+      <ul className="flex flex-col gap-4 pt-12 capitalize">
+        {NAV_ITEMS.map(({ path, name }) => (
+          <NavLink
+            key={path}
+            state={true}
+            to={`${path}`}
+            className={({ isActive }) =>
+              isActive ? "w-fit font-semibold" : "w-fit"
+            }
+            onClick={() => routeChangeHandler()}
+          >
+            <li className="relative after:absolute after:-bottom-[2px] after:left-0 after:block after:h-[3px] after:w-0 after:bg-accent-200 after:transition-all after:duration-500 hover:after:w-full">
+              {name}
+            </li>
+          </NavLink>
+        ))}
+      </ul>
+    </div>
   );
 }

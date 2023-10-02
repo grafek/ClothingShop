@@ -15,7 +15,8 @@
     "react-dom": "18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.16.0",
-    "ui": "workspace:*"
+    "ui": "workspace:*",
+    "vite-plugin-svgr": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.6.3",

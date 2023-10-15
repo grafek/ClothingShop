@@ -4,11 +4,6 @@
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
-    // "paths": {
-    //   "@ui/*": ["./"],
-    //   "@ui/components/*": ["./components/*"],
-    //   "@ui/lib/*": ["./lib/*"],
-    //   "@ui/icons/*": ["./icons/*"],
-    // }
+    "module": "NodeNext"
   }
 }

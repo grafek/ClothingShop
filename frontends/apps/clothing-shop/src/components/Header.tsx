@@ -1,10 +1,13 @@
-import { NavLink } from "react-router-dom";
+"use client";
+
 import { CrossIcon, HamburgerIcon, Logo } from "@ui/icons/index";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import CartPopover from "@shop/components/popovers/CartPopover";
 import UserPopover from "@shop/components/popovers/UserPopover";
 import FavoritesPopover from "@shop/components/popovers/FavoritesPopover";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const NAV_ITEMS = [
   {
@@ -33,27 +36,31 @@ export default function Header() {
     window.scrollTo({ behavior: "smooth", top: 0 });
   };
 
+  const currentPath = usePathname();
+
   return (
-    <header className="sticky top-0 flex flex-col gap-4 border-b bg-primary-100/60 backdrop-blur-[1px]">
+    <header className="hrefp-0 sticky flex flex-col gap-4 border-b bg-primary-100/60 backdrop-blur-[1px]">
       <div className="flex w-full items-center justify-between px-6 py-4 md:px-16">
         <div className="z-[100] flex-1 shrink-0 md:hidden">
           <button onClick={() => setIsMobileMenuVisible((prev) => !prev)}>
-            <img src={isMobileMenuVisible ? CrossIcon : HamburgerIcon} />
+            <Image
+              alt="logo"
+              src={isMobileMenuVisible ? CrossIcon : HamburgerIcon}
+            />
           </button>
         </div>
         <nav className="hidden flex-1 md:block">
           <ul className="flex gap-8 capitalize">
             {NAV_ITEMS.map(({ path, name }) => (
-              <NavLink
+              <Link
                 key={path}
-                state={true}
-                to={`${path}`}
-                className={({ isActive }) => (isActive ? "font-semibold" : "")}
+                href={`${path}`}
+                className={`${path === currentPath ? "font-semibold" : ""}`}
               >
-                <li className="relative after:absolute after:-bottom-[2px] after:left-0 after:block after:h-[3px] after:w-0 after:bg-accent-200 after:transition-all after:duration-500 hover:after:w-full">
+                <li className="after:-bothrefm-[2px] relative after:absolute after:left-0 after:block after:h-[3px] after:w-0 after:bg-accent-200 after:transition-all after:duration-500 hover:after:w-full">
                   {name}
                 </li>
-              </NavLink>
+              </Link>
             ))}
           </ul>
         </nav>
@@ -61,8 +68,8 @@ export default function Header() {
           isMobileMenuVisible={isMobileMenuVisible}
           routeChangeHandler={routeChangeHandler}
         />
-        <Link to={"/"} className="flex flex-1 shrink-0 justify-center">
-          <img src={Logo} />
+        <Link href={"/"} className="flex flex-1 shrink-0 justify-center">
+          <Image alt="logo" src={Logo} />
         </Link>
 
         {/* <SearchBar /> */}
@@ -88,7 +95,7 @@ function HamburgerMenu({
 }: HamburgerMenuProps) {
   return (
     <div
-      className={`absolute top-0 z-50 h-[100dvh] w-[calc(50%-2rem)] bg-primary-200/70 px-6 py-4 transition-all duration-500 md:hidden ${
+      className={`hrefp-0 absolute z-50 h-[100dvh] w-[calc(50%-2rem)] bg-primary-200/70 px-6 py-4 transition-all duration-500 md:hidden ${
         isMobileMenuVisible
           ? "-translate-x-6"
           : "-translate-x-[calc(100%+24px)]"
@@ -96,19 +103,16 @@ function HamburgerMenu({
     >
       <ul className="flex flex-col gap-4 pt-12 capitalize">
         {NAV_ITEMS.map(({ path, name }) => (
-          <NavLink
+          <Link
             key={path}
-            state={true}
-            to={`${path}`}
-            className={({ isActive }) =>
-              isActive ? "w-fit font-semibold" : "w-fit"
-            }
+            href={`${path}`}
+            className={`${path === name ? "font-semibold" : ""} w-fit`}
             onClick={() => routeChangeHandler()}
           >
-            <li className="relative after:absolute after:-bottom-[2px] after:left-0 after:block after:h-[3px] after:w-0 after:bg-accent-200 after:transition-all after:duration-500 hover:after:w-full">
+            <li className="after:-bothrefm-[2px] relative after:absolute after:left-0 after:block after:h-[3px] after:w-0 after:bg-accent-200 after:transition-all after:duration-500 hover:after:w-full">
               {name}
             </li>
-          </NavLink>
+          </Link>
         ))}
       </ul>
     </div>

@@ -1,8 +1,10 @@
 {
   "extends": "tsconfig/tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "./dist/types/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "module": "NodeNext"
   }
 }

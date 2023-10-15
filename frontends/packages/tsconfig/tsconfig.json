@@ -1,21 +1,12 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      // "@/*": ["./*"],
-      "@ui/components/*": ["../../packages/ui/components/*"],
-      "@ui/lib/*": ["../../packages/ui/lib/*"],
-      "@ui/icons/*": ["../../packages/ui/icons/*"],
-      "@shop/components/*": ["../../apps/clothing-shop/src/components/*"],
-      "@shop/pages/*": ["../../apps/clothing-shop/src/pages/*"]
-    },
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -23,8 +14,27 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@ui/components/*": ["../../packages/ui/components/*"],
+      "@ui/lib/*": ["../../packages/ui/lib/*"],
+      "@ui/icons/*": ["../../packages/ui/icons/*"],
+      "@shop/components/*": ["../../apps/clothing-shop/src/components/*"],
+      "@shop/pages/*": ["../../apps/clothing-shop/src/pages/*"]
+    }
   },
-  "include": ["src"],
+  "include": [
+    "../../apps/clothing-shop/src",
+    "../../apps/clothing-shop/src",
+    "**/*.ts",
+    "**/*.tsx",
+    "./dist/types/**/*.ts",
+    "../../packages/ui/components/*.tsx"
+  ],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

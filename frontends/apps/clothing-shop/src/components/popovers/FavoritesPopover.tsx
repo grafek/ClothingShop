@@ -1,13 +1,18 @@
-import { Popover, PopoverContent, PopoverTrigger } from "@ui/components/popover";
-import {  HeartIcon } from "@ui/icons/index";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@ui/components/popover";
+import { HeartIcon } from "@ui/icons/index";
+import Image from "next/image";
 
 export default function FavoritesPopover() {
   return (
     <Popover>
       <PopoverTrigger>
-        <img src={HeartIcon} />
+        <Image alt="" src={HeartIcon} />
       </PopoverTrigger>
-      <PopoverContent>{'fav'}</PopoverContent>
+      <PopoverContent>{"fav"}</PopoverContent>
     </Popover>
   );
 }

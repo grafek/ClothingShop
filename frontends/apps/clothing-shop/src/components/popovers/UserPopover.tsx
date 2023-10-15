@@ -4,14 +4,15 @@ import {
   PopoverTrigger,
 } from "@ui/components/popover";
 import { UserIcon } from "@ui/icons/index";
+import Image from "next/image";
 
 export default function UserPopover() {
   return (
     <Popover>
       <PopoverTrigger>
-        <img src={UserIcon} />
+        <Image alt="" src={UserIcon} />
       </PopoverTrigger>
-      <PopoverContent>{'user'}</PopoverContent>
+      <PopoverContent>{"user"}</PopoverContent>
     </Popover>
   );
 }
